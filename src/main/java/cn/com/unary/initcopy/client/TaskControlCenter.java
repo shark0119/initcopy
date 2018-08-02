@@ -1,16 +1,10 @@
 package cn.com.unary.initcopy.client;
 
-import java.util.List;
-
-import cn.com.unary.initcopy.client.manager.InfceClientInit;
-import cn.com.unary.initcopy.client.manager.InfceReadPackFromFile;
-import cn.com.unary.initcopy.entity.FileReadOption;
 import cn.com.unary.initcopy.grpc.entity.DeleteTask;
 import cn.com.unary.initcopy.grpc.entity.ModifyTask;
 import cn.com.unary.initcopy.grpc.entity.QueryTask;
 import cn.com.unary.initcopy.grpc.entity.SyncTask;
 import cn.com.unary.initcopy.grpc.entity.TaskState;
-import cn.com.unary.initcopy.mock.Mock;
 /**
  * Should Thread Safe
  * 任务管理中心
@@ -19,7 +13,7 @@ import cn.com.unary.initcopy.mock.Mock;
  */
 public class TaskControlCenter {
 	public static TaskState add (SyncTask task) {
-		System.out.println(task.getTaskId());
+		/*System.out.println(task.getTaskId());
 		InfceClientInit aci = Mock.getCI();
 		InfceReadPackFromFile rpff = Mock.getRPFF(task.getSyncType());
 		try {
@@ -42,7 +36,7 @@ public class TaskControlCenter {
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		return TaskState.newBuilder().setMsg("addSuccess").build();
 	}
 	public static TaskState query (QueryTask queryTask) {

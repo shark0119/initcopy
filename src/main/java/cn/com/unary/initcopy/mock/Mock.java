@@ -1,9 +1,6 @@
 package cn.com.unary.initcopy.mock;
 
-import cn.com.unary.initcopy.client.manager.InfceClientInit;
-import cn.com.unary.initcopy.client.manager.InfceReadPackFromFile;
 import cn.com.unary.initcopy.dao.FileManager;
-import cn.com.unary.initcopy.grpc.constant.SyncType;
 
 public class Mock {
 
@@ -15,7 +12,7 @@ public class Mock {
 	public static Transfer newTransfer () {
 		return new Transfer();
 	}
-	public static InfceClientInit getCI () {
+	/*public static InfceClientInit getCI () {
 		return null;
 	}
 	public static InfceReadPackFromFile getRPFF (SyncType syncType) {
@@ -27,7 +24,7 @@ public class Mock {
 			
 		}
 		return null;
-	}
+	}*/
 	public static FileManager getIFM() {
 		return null;
 	}
