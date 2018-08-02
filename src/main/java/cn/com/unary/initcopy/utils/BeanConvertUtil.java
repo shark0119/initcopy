@@ -16,9 +16,9 @@ import cn.com.unary.initcopy.entity.BaseFileInfo;
 import cn.com.unary.initcopy.entity.Constants.FileType;
 import cn.com.unary.initcopy.entity.FileInfo;
 
-public class BeanConvert {
+public class BeanConvertUtil {
 
-	private BeanConvert() {}
+	private BeanConvertUtil() {}
 	
 	/**
 	 * 将初始化时发送的文件信息转化为文件信息实体。FileInfo 包含了文件除内容以外所有的信息。
@@ -64,5 +64,10 @@ public class BeanConvert {
 			fis.add(fi);
 		}
 		return null;
+	}
+	public static String serToSql (FileInfo fi) {
+		StringBuilder sb = new StringBuilder ("");
+		
+		return sb.toString();
 	}
 }

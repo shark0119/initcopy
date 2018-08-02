@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +15,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Component;
 
 import cn.com.unary.initcopy.config.BeanConfig;
-import cn.com.unary.initcopy.dao.DataSource;
 
 @Component
 public class TestTest {
@@ -46,25 +43,6 @@ public class TestTest {
 		Supplier<String> s = Te::staticFun;
 	}*/
 	@Test
-	public void test2 () {
-		DataSource ds = new DataSource();
-		try {
-			ds.init("G:\\sqliteDB\\test.db");
-			Statement stmt = ds.getConnection().createStatement();
-			stmt.execute("INSERT INTO FILE_INFO VALUES('asdfadsdfasdf', 'dd', 2, '22', '222', 'd');");
-			stmt.executeQuery("");
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				ds.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	@Test
 	public void test3 () {
 		File file = new File("G:\\temp\\奸商.java");
 		try {
@@ -88,14 +66,31 @@ public class TestTest {
 			e1.printStackTrace();
 		}
 	}
+	@Test
+	public void test4 () {
+		String [] fileIds = {"id1", "id2", "id3"};
+		StringBuilder sb = new StringBuilder("select * from FILE_INFO WHERE FILE_ID IN ('");
+		for (String fileId : fileIds) {
+			sb.append(fileId + "','");
+		}
+		sb.delete(sb.length()-2, sb.length());
+		sb.append(")");
+		System.out.println(sb.toString());
+	}
+	private static String str;
+	
 	@Autowired
 	@Qualifier("str2")
-	String str;
+	public void setStr(String str) {
+		TestTest.str = str;
+	}
 	public static void main (String [] args) {
 		try {
 			AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(BeanConfig.class);
-			TestTest tt = ac.getBean(TestTest.class);
-			System.out.println(tt.str);
+			/*FileInfo f = ac.getBean(FileInfo.class);
+			FileInfo f1 = ac.getBean(FileInfo.class);
+			System.out.println(f.equals(f1));*/
+			System.out.println(TestTest.str);
 			ac.close();
 		} catch (Exception e) {
 			e.printStackTrace();

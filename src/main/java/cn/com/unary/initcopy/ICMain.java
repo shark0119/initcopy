@@ -1,7 +1,7 @@
 package cn.com.unary.initcopy;
 
 import cn.com.unary.initcopy.client.InitCopyGrpcServer;
-import cn.com.unary.initcopy.server.ICServer;
+import cn.com.unary.initcopy.server.InitCopyServer;
 
 /**
  * 程序入口
@@ -60,7 +60,7 @@ public class ICMain {
 			
 		if (isServer) {
 			try {
-				ICServer.activate();
+				InitCopyServer.activate();
 			} catch (Exception e) {
 				System.out.println("Copy Server Start Fail. " + e.getMessage());
 				return;

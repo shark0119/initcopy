@@ -10,7 +10,7 @@ import cn.com.unary.initcopy.exception.UnaryIOException;
  * @author shark
  *
  */
-public class JavaFileInput extends AbstInput {
+public class JavaNioFileInput extends AbstractFileInput {
 
 	@Override
 	public byte[] read(int size) {

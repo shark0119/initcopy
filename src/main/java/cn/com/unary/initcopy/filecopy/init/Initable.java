@@ -8,7 +8,7 @@ import cn.com.unary.initcopy.grpc.entity.SyncTask;
  * @author shark
  *
  */
-public interface InfceInit {
+public interface Initable {
 	// 源端开始初始化
 	ServerInitResp startInit (SyncTask syncTask)throws Exception; 
 }

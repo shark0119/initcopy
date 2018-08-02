@@ -8,8 +8,8 @@ import java.io.IOException;
  * @author shark
  *
  */
-public class ICServer {
-	private ICServer () {}
+public class InitCopyServer {
+	private InitCopyServer () {}
 	
 	public void start () throws IOException {
 		
@@ -20,7 +20,7 @@ public class ICServer {
 	}
 	
 	public static void activate() throws IOException, InterruptedException  {
-		ICServer server = new ICServer();
+		InitCopyServer server = new InitCopyServer();
 		server.start();
 		server.blockUntilShutdown();
 	}

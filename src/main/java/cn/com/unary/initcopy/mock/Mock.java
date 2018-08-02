@@ -2,7 +2,7 @@ package cn.com.unary.initcopy.mock;
 
 import cn.com.unary.initcopy.client.manager.InfceClientInit;
 import cn.com.unary.initcopy.client.manager.InfceReadPackFromFile;
-import cn.com.unary.initcopy.dao.InfceFileManager;
+import cn.com.unary.initcopy.dao.FileManager;
 import cn.com.unary.initcopy.grpc.constant.SyncType;
 
 public class Mock {
@@ -28,7 +28,7 @@ public class Mock {
 		}
 		return null;
 	}
-	public static InfceFileManager getIFM() {
+	public static FileManager getIFM() {
 		return null;
 	}
 }

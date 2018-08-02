@@ -10,13 +10,15 @@ import org.springframework.context.annotation.Configuration;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
+import cn.com.unary.initcopy.entity.FileInfo;
+
 /**
  * 用于 Spring 创建 Beans
  * @author shark
  *
  */
 @Configuration
-@ComponentScan(basePackages="com.cn.unary.initcopy.config")
+@ComponentScan(basePackages= {"cn.com.unary.initcopy.config", "com.cn.unary"})
 public class BeanConfig {
 
 	/**
@@ -51,6 +53,11 @@ public class BeanConfig {
 	@Bean
 	public SimpleDateFormat sdf () {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	}
+	@Bean
+	// @Scope("singleton")
+	public FileInfo fileInfo () {
+		return new FileInfo();
 	}
 	@Bean
 	public String str1 () {

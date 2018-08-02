@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.unary.initcopy.InitCopyContext;
-import cn.com.unary.initcopy.dao.InfceFileManager;
+import cn.com.unary.initcopy.dao.FileManager;
 import cn.com.unary.initcopy.entity.Constants.MODE;
 import cn.com.unary.initcopy.entity.FileInfo;
-import cn.com.unary.initcopy.filecopy.io.AbstInput;
+import cn.com.unary.initcopy.filecopy.io.AbstractFileInput;
 import cn.com.unary.initcopy.mock.UnaryTransferClient;
 import cn.com.unary.initcopy.mock.UnaryTransferServer;
 
@@ -16,15 +16,15 @@ import cn.com.unary.initcopy.mock.UnaryTransferServer;
  * @author shark
  *
  */
-public class FilePackAndAna implements InfceFilePackAndAna {
+public class SyncAllFilePackAndResolve implements FilePackAndResolve {
 	
-	private AbstInput input;
-	private InfceFileManager ifm;
+	private AbstractFileInput input;
+	private FileManager ifm;
 	private UnaryTransferClient utc;
 	private UnaryTransferServer uts;
 	private static int MAX_PACK_SIZE;
 	
-	public FilePackAndAna (MODE mode) {
+	public SyncAllFilePackAndResolve (MODE mode) {
 		switch (mode) {
 		case SERVER :
 			uts = InitCopyContext.getCurrentContext().getUts();
@@ -39,7 +39,7 @@ public class FilePackAndAna implements InfceFilePackAndAna {
 	}
 	@Override
 	public void start(List<String> fileIds){
-		List<FileInfo> fis = ifm.query(fileIds);
+		List<FileInfo> fis = ifm.query(fileIds.toArray(new String[fileIds.size()]));
 		List<String> fileNames = new ArrayList<>();
 		for (FileInfo fi : fis) {
 			fileNames.add(fi.getFullName());

@@ -1,59 +1,37 @@
 package cn.com.unary.initcopy.dao;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import cn.com.unary.initcopy.entity.FileInfo;
-import cn.com.unary.initcopy.utils.ValidateUtils;
 
 /**
- * 文件信息管理，存储在内存中，Java对象维护方式
+ * 用于持久化文件的相关信息
  * @author shark
  *
  */
-public class FileManager implements InfceFileManager {
-
-	private static Map<String, FileInfo> fiMap = new ConcurrentHashMap<>();
-
-	@Override
-	public FileInfo query(String fileId) {
-		return fiMap.get(fileId);
-	}
-	@Override
-	public List<FileInfo> query(List<String> fileIds) {
-		if (ValidateUtils.isEmpty(fileIds))
-			return null;
-		List<FileInfo> fis = new ArrayList<>();
-		for (String id : fileIds) {
-			FileInfo fi = fiMap.get(id); 
-			fis.add(fi);
-		}
-		return fis;
-	}
-	@Override
-	public void save(FileInfo fi) {
-		if (ValidateUtils.isEmpty(fi.getId())) {
-			fi.setId(UUID.randomUUID().toString());
-		}
-		fiMap.put(fi.getId(), fi);
-	}
-	@Override
-	public void save(List<FileInfo> fis) {
-		for (FileInfo fi : fis) {
-			this.save(fi);
-		}
-	}
-	@Override
-	public void delete(String fileId) {
-		fiMap.remove(fileId);
-	}
-	@Override
-	public void delete(List<String> fileIds) {
-		for (String fileId : fileIds) {
-			this.delete(fileId);
-		}
-	}
+public interface FileManager {
+	/**
+	 * 根据指定的文件 ID 集合查询出文件信息集合
+	 * @param fileIds
+	 * @return Id为空时返回空集合
+	 * @throws IOException 
+	 */
+	List<FileInfo> query (String...fileIds);
+	/**
+	 * 保存文件实体信息
+	 * @param fi
+	 */
+	void save (FileInfo fi);
+	/**
+	 * 保存传进来的数据，如无文件Id，则做新增操作，自动生成Id。
+	 * 如有文件Id，则做保存操作。
+	 * @param bfis
+	 */
+	void save (List<FileInfo> fis);
+	/**
+	 * 根据文件Id集合删除文件实体信息
+	 * @param fileIds
+	 */
+	void delete (String...fileIds);
 }

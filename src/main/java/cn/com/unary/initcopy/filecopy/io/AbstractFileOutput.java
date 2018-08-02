@@ -7,20 +7,20 @@ import java.nio.file.StandardOpenOption;
 
 import cn.com.unary.initcopy.exception.UnaryIOException;
 
-public abstract class AbstInput{
-	
+/**
+ * 向文件写入数据，模式为附加
+ * @author shark
+ *
+ */
+public abstract class AbstractFileOutput{
+
 	protected FileChannel currentFileChannel ;
-	protected boolean finish = false;
 	
 	public void setFile(String fileName) {
-		if (!finish) {
-			// TODO logger abandon a unfinished file
-		}
 		try {
 			currentFileChannel = FileChannel.open(
 					Paths.get(fileName),
-					StandardOpenOption.READ);
-			finish = false;
+					StandardOpenOption.APPEND);
 		} catch (IOException e) {
 			// TODO logger Exception
 			throw new UnaryIOException("ERROR CODE 0X01: file open error.", e);
@@ -28,14 +28,9 @@ public abstract class AbstInput{
 	}
 
 	/**
-	 * 读取文件，返回能读取到的数据，如果读到文件尾，返回空数组
-	 * 为了兼容 NIO 中的零拷贝方式
-	 * @param size 期望读取到的个数
-	 * @return 返回读到的字节数组
+	 * 向文件中写入指定的字节数组
+	 * @param data 待写入的数据
+	 * @return 返回实际写入的字节个数
 	 */
-	public abstract byte[] read(int size); 
-	
-	protected void finished () {
-		finish = true;
-	}
+	abstract int write(byte[] data);// 写入文件，返回写入的字节数
 }

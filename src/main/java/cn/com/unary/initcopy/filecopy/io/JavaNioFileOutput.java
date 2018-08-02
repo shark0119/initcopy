@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 
 import cn.com.unary.initcopy.exception.UnaryIOException;
 
-public class JavaFileOutput extends AbstOutput{
+public class JavaNioFileOutput extends AbstractFileOutput{
 
 	@Override
 	int write(byte[] data) {
