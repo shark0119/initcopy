@@ -1,13 +1,17 @@
 package cn.com.unary.initcopy.entity;
 
-import java.util.List;
-
 import cn.com.unary.initcopy.entity.Constants.FileType;
 
+/**
+ * 同步过程中需要获取的文件信息相关数据
+ * @author shark
+ *
+ */
 public class FileInfo extends BaseFileInfo{
 	private static final long serialVersionUID = 7000233780395813428L;
 	private FileType fileType;
-	private List<Integer> seqs;
+	private int beginPackIndex;
+	private int finishPackIndex;
 	private FileAttr attr;
 	
 	public FileInfo () {}
@@ -21,14 +25,17 @@ public class FileInfo extends BaseFileInfo{
 	public void setAttr(FileAttr attr) {		this.attr = attr;	}
 	public FileType getFileType() {		return fileType;	}
 	public void setFileType(FileType fileType) {		this.fileType = fileType;	}
-	public List<Integer> getSeqs() {		return seqs;	}
-	public void setSeqs(List<Integer> seqs) {		this.seqs = seqs;	}
+	public int getBeginPackIndex() {		return beginPackIndex;	}
+	public void setBeginPackIndex(int beginPackIndex) {		this.beginPackIndex = beginPackIndex;	}
+	public int getFinishPackIndex() {		return finishPackIndex;	}
+	public void setFinishPackIndex(int finishPackIndex) {		this.finishPackIndex = finishPackIndex;	}
 	
 	public FileAttr newFileAttr () {		return new FileAttr();	}
-	
+
 	@Override
 	public String toString() {
-		return "FileInfo [fileType=" + fileType + ", seqs=" + seqs + ", attr=" + attr + "]";
+		return "FileInfo [fileType=" + fileType + ", beginPackIndex=" + beginPackIndex + ", finishPackIndex="
+				+ finishPackIndex + ", attr=" + attr + "]";
 	}
 
 	public static class FileAttr {

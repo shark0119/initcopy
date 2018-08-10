@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import cn.com.unary.initcopy.entity.FileInfo;
+import cn.com.unary.initcopy.utils.AbstractLogable;
 import cn.com.unary.initcopy.utils.ValidateUtils;
 
 /**
@@ -14,7 +15,7 @@ import cn.com.unary.initcopy.utils.ValidateUtils;
  * @author shark
  *
  */
-public class RamFileManager implements FileManager {
+public class RamFileManager extends AbstractLogable implements FileManager {
 
 	private static Map<String, FileInfo> fiMap = new ConcurrentHashMap<>();
 
@@ -25,6 +26,10 @@ public class RamFileManager implements FileManager {
 		List<FileInfo> fis = new ArrayList<>();
 		for (String id : fileIds) {
 			FileInfo fi = fiMap.get(id); 
+			if (fi == null) {
+				logger.warn("No FileInfo With Id {1}", id);
+				continue;
+			}
 			fis.add(fi);
 		}
 		return fis;

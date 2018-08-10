@@ -13,30 +13,21 @@ import cn.com.unary.initcopy.server.TaskControlGrpcServer;
  * @author shark
  */
 public class InitCopyContext {
-	private InitCopyContext() {}
+	public InitCopyContext() {}
+
+	// 全局的属性
+	public final static String CHARSET = "UTF-8";
 	
+	// 传输模块监听的端口
 	protected static int transPort;
+	// 面向外部 GRPC 服务监听的端口
 	protected static int grpcPort; 
+	// 源端与目标端之间 GRPC 通讯监听的端口
 	protected static int innerGrpcPort = 6002; 
 	
 	private static Boolean isActive = Boolean.FALSE;
 	private static UnaryTransferServer uts;
 	
-	private static InitCopyContext icc;
-	private static Object lock = new Object();
-	
-	public static InitCopyContext getInstance () {
-		if (icc == null) {
-			synchronized (lock) {
-				if (icc == null)
-					icc = new InitCopyContext();
-			}
-		}
-		return icc;
-	}
-	public static InitCopyContext getCurrentContext () {
-		return null;
-	}
 	/**
 	 * 初始化相关变量；
 	 * 启动向外部提供任务管理的 GRPC 服务（源端）；

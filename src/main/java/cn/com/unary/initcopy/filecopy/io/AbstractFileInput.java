@@ -28,7 +28,7 @@ public abstract class AbstractFileInput{
 	}
 
 	/**
-	 * 读取文件，返回能读取到的数据，如果读到文件尾，返回空数组
+	 * 读取文件，返回能读取到的数据，如果读到文件尾，返回长度为0的字节数组
 	 * 为了兼容 NIO 中的零拷贝方式
 	 * @param size 期望读取到的个数
 	 * @return 返回读到的字节数组

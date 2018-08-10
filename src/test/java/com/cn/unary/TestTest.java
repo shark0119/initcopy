@@ -15,6 +15,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Component;
 
 import cn.com.unary.initcopy.config.BeanConfig;
+import cn.com.unary.initcopy.utils.MD5FileUtil;
 
 @Component
 public class TestTest {
@@ -76,6 +77,15 @@ public class TestTest {
 		sb.delete(sb.length()-2, sb.length());
 		sb.append(")");
 		System.out.println(sb.toString());
+	}
+	@Test
+	public void test5 () {
+		try {
+			String md5 = MD5FileUtil.getFileMD5(new File("E:\\Shark_File\\Download\\nexus-3.13.0-01-win64.zip"));
+			System.out.println(md5.equals("aad5dc5503c7a508e56cb8192f503f38"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	private static String str;
 	

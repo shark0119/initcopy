@@ -18,15 +18,8 @@ public final class Constants {
 		REGULAR_FILE, DIR, SYMBOLIC_LINK, OTHER,
 	}
 	public static enum PackType {
-		REQ_INIT(0x01), // 请求-初始化
-		REQ_DELETE_TASK(0x02),	// 请求-删除任务
-		
-		DATA_PACK_OF_SYNC_ALL (0x40),	// 数据包
-		DATA_PACK_OF_SYNC_DIFF (0x41),
-		
-		RESP_INIT(0x80),	// 响应-初始化
-		
-		ERROR(0xA1),	// 错误
+		SYNC_ALL_JAVA(0x01), // 全复制- Java
+		RSYNC_JAVA(0x02),	// 差异复制- rsync
 		;
 		private byte value;
 		private PackType (int b) {			value = (byte)b;		}
